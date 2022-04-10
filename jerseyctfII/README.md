@@ -321,17 +321,97 @@ Entering the correct answers provides us a pop-up with our flag: `jctf{b3_CAR3fu
 --------------------------------------------------------------------------------
 
 ## Forensics <a name="forensics"></a>
-The second paragraph text
+Forensics offered some new challenges and tools to look into, as well as offered some comfort through familiarity with linux.   
 
 ### stolen-data - 150 pts <a name="stolen-data"></a>
 
+**Provided:** Someone accessed the server and stole the flag. Use the network packet capture to find it.
+
+**Hint:** Look for unusual ports
+
+**Solution:** We were provided a PCAP file, so I decided to explore it in Wireshark. Poking around, we see some traffic on `4444`, which is unusual, and following this TCP stream we see a pdf being retrieved:
+
+![TCP](src/stolen-data-tcp.jpg)
+
+Exporting the data as raw, we can obtain the PDF itself being sent, and voila it contains our desired flag:
+
+![TCP](src/stolen-data-pdf.jpg)
+
 ### speedy-at-midi - 150 pts <a name="speedy-at-midi"></a>
+
+**Provided:** Your partner-in-crime gets a hold of a MIDI file, riff.mid, which intelligence officials claim to contain confidential information. He has tried opening it in VLC Media Player, but it sounds just like the piano riff in `riff.mp3`. Can you find the right tool to extract the hidden data?
+
+**Solution:** We are provided with a `.mid` and a `.mp3` to work with. Listening to them off the bat, it is just junk noise and nothing of help. Since one file is a `midi` and that happens to coincide with our challenge name, I decided to open it up in a midi editor I used back when writing Noteblock songs for Minecraft... ah, memories.
+
+Scrolling around to view the various channels, I noticed a track that looked rather interesting:
+
+![midiart](src/midi1.jpg)
+
+*ENHANCE*
+
+![ENHANCE](src/spykidswassogood.gif)
+
+![midiart](src/midi_flag.jpg)
+
+_nice_
 
 ### data-backup - 250 pts <a name="data-backup"></a>
 
+**Provided:** The backup of our data was somehow corrupted. Recover the data and be rewarded with a flag.
+
+**Hint:** Try a tool a surgeon might use.
+
+**Solution:** Well, I did say that my goal of this competition was to learn new tools, so I Googled "scalpel cybersecurity" and with a stroke of luck, there happens to be a tool indeed named `Scalpel` used for file carving.
+
+[Here](https://github.com/sleuthkit/scalpel) is the tool's repo, and [here](https://github.com/HackThisSite/CTF-Writeups/blob/master/2017/EasyCTF/Zooooooom/scalpelConfig.txt) is the config that I used, but the TLDR of the tool is that it leverages known "magic" bytes of various file formats to carve them out of a corrupted dump.
+
+I ran the following on our provided `data-backup` file: `scalpel -c scalpelconfig.txt data-backup` and was presented with the following in under a second:
+
+![scalpel](src/scalpel_output.jpg)
+
+This recovered 5 zip files, numbered 0-4. Upon unzipping file "0", I was greeted by a `flag.pdf` and a `flag.png`. The .pdf contained our flag: `jctf{fun_w17h_m461c_by735}`
+
 ### scavenger-hunt - 350 pts <a name="scavenger-hunt"></a>
 
+**Provided:** My friend told me he hid a flag for me on this server! Server: `0.cloud.chals.io` SSH port: `24052`
+Username: `jersey`
+Password: `securepassword`
+
+**Solution:**
+
+`scavenger-hunt` ended up being pretty funny, as all of us attempting the challenge were ssh'ed into the server as the same user at the same time, so people took the opportunity to troll and spam `wall` commands to share ASCII art with everyone. It was halfway tempting to spin up a cron job to send messages of my own, but after all I *did* agree to Rule 3 on discord `3. Don’t spam. This includes posting off-topic or repetitive messages.` so I decided against it... That aside, let's get to the challenge!
+
+Upon SSHing into our server, I ran `ls -la` to get my bearings, and saw a single folder named `folder`, which I then cd into. Running `ls -la` again, we see a `.secret_folder` and cd there. We are greeted by a `flag.txt`, but upon catting it, we see that it's a clue to the next location. Viewing `/etc/passwd`, we see a user by the name of `hey_that_package_is_sus`, pointing us in the direction of looking at installed packages.  
+
+![scav](src/scavengerhunt1.jpg)
+
+Searching our packages and looking for a flag, we see a package `notaflag` that may be of interest. Getting information on this package redirects us to its manual, and at last, we have our flag:
+
+![scav](src/scavengerhunt2.jpg)
+
+![scav](src/scavengerhunt3.jpg)
+
 ### corrupted-file - 400 pts <a name="corrupted-file"></a>
+
+**Provided:** Can you find a way to fix our corrupted .jpg file?
+
+**Solution:** We are provided with a photo that isn't doing so well at photo-ing in its current state.
+
+Looking at the file in a hex editor, one of our group members quickly identified that the magic identification bytes at the start did not match what a JPEG should have:
+
+Our file bytes:
+
+![corruptedhex](src/corrupted-file-hex.jpg)
+
+Proper bytes, according to the Internet:
+
+![corruptedhex](src/corrupted-file-rightbytes.jpg)
+
+This is pretty easy to fix. Running the following command, we can edit the required bytes and voila, our photo is once again photo-ing:
+
+`printf '\xff\xd8\xff\xe0' | cat - flag_mod.jpg > new_flag.jpg`
+
+![corruptedhex](src/corrupted-file-no-longer-corrupted.jpg)
 
 --------------------------------------------------------------------------------
 
