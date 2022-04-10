@@ -247,43 +247,76 @@ OSINT is new to me, and aside from playing around on my own time or getting an o
 
 ### dns-joke - 100 pts <a name="dns-joke"></a>
 
-**Provided:**
+**Provided:** A system administrator hasn't smiled in days. Legend has it, there is a DNS joke hidden somewhere in www.jerseyctf.com. Can you help us find it to make our system administrator laugh?
 
-**Hint:**
+**Solution:** For this challenge, I first did a `nslookup` on the domain and didn't see anything out of the ordinary, so decided to check all of the various record types. It is easiest to do so using an online service, in my opinion, so I used the [following link](https://dnschecker.org/all-dns-records-of-domain.php?query=www.jerseyctf.com&rtype=ALL&dns=google).
 
-**Solution:**
+We can see that the TXT record has our flag: `jctf{DNS_J0k3s_t@k3_24_hrs}`
 
 ### photo-op-spot - 250 pts <a name="photo-op-spot"></a>
 
-**Provided:**
+**Provided:** In three words tell me where I stood when I grabbed this picture.
 
-**Hint:**
+**Hint:** GPS coordinates aren't the only method of specifying a location.
+Solution format: jctf{yourthreewords} - no special characters
 
-**Solution:**
+**Solution:** We were provided a picture for this challenge, which I first ran through `exiftool` to see if any metadata would leak our desired GPS location. Unfortunately, it did not, so I ran it through a reverse image search in Google and discovered it to be the `Transforest` public art piece in Seattle, WA. I poked around in Google Maps street view to identify the same location as the picture and was able to obtain GPS coordinates, but our flag doesn't want them in that format...
+
+I struggled quite a bit on what three words it wanted, and tried combinations including Google Maps labels, nearby landmarks, the city/state/country, etc. I then Googled "three words location" and was given a site called "what3words," which apparently seems to be a popular and well-known service that I was previously quite unaware of. This site takes GPS locations and translates any location into, well, 3 words. How convenient!
+
+Using this, I get the words `Unions`, `Lake`, `Spine`. Based on nearby items, I can understand the first 2 words, but not sure where `Spine` comes from. Oh well, that's an inquiry for another time.
+
+Trying the flag `jctf{unionslakespine}` worked, so good enough for me!
 
 ### mystery - 250 pts <a name="mystery"></a>
 
-**Provided:**
+**Provided:** Someone thought it would be fun to leave this mysterious clue. How do these two items lead to the flag?
 
-**Hint:**
+![youknowmymethodswatson](src/sherlock.jpg)
 
-**Solution:**
+**Solution:** Given the picture, my first instinct was to run `exiftool`, `xxd`, and `binwalk` on it to check for steganography-type puzzles or metadata clues. Nothing was coming up, so I decided to use our pal Google to search for cyber tools/references related to either a delicious breakfast of Eggs Benedict or perhaps the character Sherlock. Somewhat understandably, the latter is what got a hit and I was introduced to a OSINT search tool called `Sherlock` that takes a username, then returns all references of it across sites on the internet.
+
+Running our tool with the provided (what appears to be) username grants us the following:
+
+![thehuntsafoot](src/sherlock_output.jpg)
+
+Most of these sites appeared to be actually nonexistent once digging deeper, but Twitter and Instagram proved to be valid accounts. Digging into recent posts on both, a comment was discovered on Twitter that contained our flag: `jctf{Myst3ry-S0lv3d!}`
 
 ### rarity - 350 pts <a name="rarity"></a>
 
-**Provided:**
+**Provided:** With three belonging to a respective company, there is only a two-digit number amount of this entity left in the world. There is one near this picture... how close can you get to it? The flag format is the coordinates in decimal degrees notation, for example: `jctf{-65.91374,-10.81140}`
 
-**Hint:**
+![blimps](src/rarity.jpg)
 
-**Solution:**
+**Hint:** Aren't sub sandwiches great?
+
+**Solution:** This one was quite puzzling to start. The typical `exiftool` and Google reverse image search was attempted with no results. The hints made me think of Subway, Jersey Mikes, Jimmy Johns, and the likes, but I couldn't imagine one being near a setting as seen in this pic.
+
+A group member cleverly noted the area code visible in the bottom righthand corner, which with some research directs us to the Akron, Ohio area. Poking around a bit on Google maps still wasn't making things click, so we moved on to other challenges for a bit.
+
+Another hint was given late in the day of `Hindenberg Disaster`, which then makes the rarity/entity statement click: we are looking for `blimps`. *Sidenote: I was curious wtf the original hint was about, and a quick Google of 'blimp sub sandwich' revealed that there's a sub franchise called 'Blimpies' so TIL...*
+
+Back to Google Maps, I am drawn to the Wingfoot Lake area where Goodyear has a large blimp hanger. Poking around in street view, I walked around the lake's roads, and while taking a walk through the park, I was able to get close to our provided picture. Using those coordinates, we have our flag: `jctf{41.019753,-81.3621151}`
 
 ### contributor - 400 pts <a name="contributor"></a>
 
-**Provided:**
+**Provided:** Aren’t tech talks great? The JerseyCTF organizing staff is so grateful that our speakers can share their wonderful experiences with our participants. In fact, one of the speakers actually helped us develop https://www.jerseyctf.com/ and http://www.jerseyctf.online/. How cool is that!
 
-**Hint:**
+**Hint:** 1.0 × 10^100
 
-**Solution:**
+**Solution:** Given our hint, my immediate reaction is that the speaker in mind would be from Google, given they were one of the sponsors. However, when poking around looking at the speakers, I noticed a silly company/title for an individual named `Donnie Rodgers`.
+
+A quick Google search brought up a LinkedIn profile that definitely appeared to be fake and useful for our purposes.
+
+![Donnie](src/Donnie.jpg)
+
+The second URL in the challenge description was one I hadn't seen yet, so I decided to poke around. It provided a login page with a `Forgot Password` functionality and it didn't appear to prevent brute forcing tries. Going through common First + Last combinations on Donnie's name as a username, `DRodgers` leads us to 3 security questions:
+
+![Donnie](src/Donniepw.jpg)
+
+Using our newfound information on Donnie from LinkedIn, we can easily answer the questions. I funnily entered "chess" as the favorite sport before trying a second time with "Arm wrestling" which was correct.
+
+Entering the correct answers provides us a pop-up with our flag: `jctf{b3_CAR3fu1_wh@t_yOU_put_on_the_WEB}`
 
 --------------------------------------------------------------------------------
 
