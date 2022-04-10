@@ -61,13 +61,13 @@ For now here are the (much easier...) ones I did solve...
 
 ### salad - 50 pts <a name="salad"></a>
 
-**Provided:** atkw{plddp_jrcru_uivjjzex}
+**Challenge Description:** atkw{plddp_jrcru_uivjjzex}
 
 **Solution:** This one was a gimme, so using our friend Caesar's cipher, we can quickly deduce our first flag: `jctf{yummy_salad_dressing}`
 
 ### new-algorithm - 75 pts <a name="new-algorithm"></a>
 
-**Provided:** On the first day of the job, a new cryptography intern is insisting to upper management that he developed a new encryption algorithm for the company to use for sensitive emails and should get a raise. This seems too good to be true... are you able to prove the intern wrong by decrypting it?
+**Challenge Description:** On the first day of the job, a new cryptography intern is insisting to upper management that he developed a new encryption algorithm for the company to use for sensitive emails and should get a raise. This seems too good to be true... are you able to prove the intern wrong by decrypting it?
 
 Here's an example of an encrypted email message using the intern's algorithm: `amN0Znt0UllfQUVTX0lOc1QzQGR9`
 
@@ -75,7 +75,7 @@ Here's an example of an encrypted email message using the intern's algorithm: `a
 
 ### xoracle - 150 pts <a name="xoracle"></a>
 
-**Provided:** Check out my cool new encryption service! It's very secure! Connect to `0.cloud.chals.io` on port `19305`.
+**Challenge Description:** Check out my cool new encryption service! It's very secure! Connect to `0.cloud.chals.io` on port `19305`.
 
 **Hint:** Read carefully: a small mistake or typo can be all it takes to make an encryption system insecure.
 
@@ -87,7 +87,7 @@ As we can see from the screenshot, this program XORs our input against a key of 
 
 ### secret-message - 200 pts <a name="secret-message"></a>
 
-**Provided:** There are two bank heist organizations communicating by sending images of expensive assets to each other, could there be a secret message somewhere? Along with the images, they are sending the same secret_key.txt file with encoded text.
+**Challenge Description:** There are two bank heist organizations communicating by sending images of expensive assets to each other, could there be a secret message somewhere? Along with the images, they are sending the same secret_key.txt file with encoded text.
 
 **Hint:** The employees of both organizations passed Decoding 101 in high school, but failed Encryption 101 in college.
 
@@ -97,7 +97,7 @@ The provided photo must have hidden data in it somehow, so I tried the typical `
 
 ### would-you-wordle - 250 pts <a name="would-you-wordle"></a>
 
-**Provided:** Someone left this secret text string and unfinished Wordle. Can you put them together to get the flag? pUpPHg3KfB15MG2KGtQQMDEECPOF8oa3VA==
+**Challenge Description:** Someone left this secret text string and unfinished Wordle. Can you put them together to get the flag? pUpPHg3KfB15MG2KGtQQMDEECPOF8oa3VA==
 
 **Hint:** Ron's Code
 
@@ -113,7 +113,7 @@ Going off our hint, I assume it is a reference to RC4, and I toss the provided s
 
 ### file-zip-cracker - 450 pts <a name="file-zip-cracker"></a>
 
-**Provided:** We have a secret file that is password protected. However, we have obtained a wordlist of actors that is part of the password. The password is the combination of one of the names on the list with a year.
+**Challenge Description:** We have a secret file that is password protected. However, we have obtained a wordlist of actors that is part of the password. The password is the combination of one of the names on the list with a year.
 Format: "Actor_NameYYYY"
 Example: "Henry_Cavill1964"
 
@@ -176,7 +176,7 @@ This section included some new types of files that I was unable to solve, such a
 
 ### patches - 200 pts <a name="patches"></a>
 
-**Provided**: Given an objdump of an executable, figure out what hexadecimal instructions are needed to nop to get the jctf flag to stdout
+**Challenge Description**: Given an objdump of an executable, figure out what hexadecimal instructions are needed to nop to get the jctf flag to stdout
 
 **Hint:** Simply enter the opcodes
 
@@ -192,7 +192,7 @@ Our flag is `jctf{7e0a}`
 
 ### misdirection - 250 pts <a name="misdirection"></a>
 
-**Provided:** Where'd the flag go?
+**Challenge Description:** Where'd the flag go?
 
 **Hint:** There are many ways to solve this challenge, some of which are much easier than others.
 
@@ -208,7 +208,7 @@ One possible solution is that we XOR the two arrays by hand, but I'm lazy. So in
 
 ### going-over - 350 pts <a name="going-over"></a>
 
-**Provided:** My friends said they were going on a trip but I think they ran into some trouble... They sent me these two files before we lost contact (*src.c* and *going-over*).
+**Challenge Description:** My friends said they were going on a trip but I think they ran into some trouble... They sent me these two files before we lost contact (*src.c* and *going-over*).
 `nc 0.cloud.chals.io 10197`
 
 **Solution:** My first steps when approaching a new binary are to run `checksec`, `file`, and `strings | grep <flag format>` for some easy wins. While this challenge isn't *that* easy, popping it open in Ghidra makes it pretty apparent what we're working with and it's nearly as easy:
@@ -247,7 +247,7 @@ OSINT is new to me, and aside from playing around on my own time or getting an o
 
 ### dns-joke - 100 pts <a name="dns-joke"></a>
 
-**Provided:** A system administrator hasn't smiled in days. Legend has it, there is a DNS joke hidden somewhere in www.jerseyctf.com. Can you help us find it to make our system administrator laugh?
+**Challenge Description:** A system administrator hasn't smiled in days. Legend has it, there is a DNS joke hidden somewhere in www.jerseyctf.com. Can you help us find it to make our system administrator laugh?
 
 **Solution:** For this challenge, I first did a `nslookup` on the domain and didn't see anything out of the ordinary, so decided to check all of the various record types. It is easiest to do so using an online service, in my opinion, so I used the [following link](https://dnschecker.org/all-dns-records-of-domain.php?query=www.jerseyctf.com&rtype=ALL&dns=google).
 
@@ -255,12 +255,12 @@ We can see that the TXT record has our flag: `jctf{DNS_J0k3s_t@k3_24_hrs}`
 
 ### photo-op-spot - 250 pts <a name="photo-op-spot"></a>
 
-**Provided:** In three words tell me where I stood when I grabbed this picture.
+**Challenge Description:** In three words tell me where I stood when I grabbed this picture.
 
 **Hint:** GPS coordinates aren't the only method of specifying a location.
 Solution format: jctf{yourthreewords} - no special characters
 
-**Solution:** We were provided a picture for this challenge, which I first ran through `exiftool` to see if any metadata would leak our desired GPS location. Unfortunately, it did not, so I ran it through a reverse image search in Google and discovered it to be the `Transforest` public art piece in Seattle, WA. I poked around in Google Maps street view to identify the same location as the picture and was able to obtain GPS coordinates, but our flag doesn't want them in that format...
+**Solution:** We were given a picture for this challenge, which I first ran through `exiftool` to see if any metadata would leak our desired GPS location. Unfortunately, it did not, so I ran it through a reverse image search in Google and discovered it to be the `Transforest` public art piece in Seattle, WA. I poked around in Google Maps street view to identify the same location as the picture and was able to obtain GPS coordinates, but our flag doesn't want them in that format...
 
 I struggled quite a bit on what three words it wanted, and tried combinations including Google Maps labels, nearby landmarks, the city/state/country, etc. I then Googled "three words location" and was given a site called "what3words," which apparently seems to be a popular and well-known service that I was previously quite unaware of. This site takes GPS locations and translates any location into, well, 3 words. How convenient!
 
@@ -270,13 +270,13 @@ Trying the flag `jctf{unionslakespine}` worked, so good enough for me!
 
 ### mystery - 250 pts <a name="mystery"></a>
 
-**Provided:** Someone thought it would be fun to leave this mysterious clue. How do these two items lead to the flag?
+**Challenge Description:** Someone thought it would be fun to leave this mysterious clue. How do these two items lead to the flag?
 
 ![youknowmymethodswatson](src/sherlock.jpg)
 
 **Solution:** Given the picture, my first instinct was to run `exiftool`, `xxd`, and `binwalk` on it to check for steganography-type puzzles or metadata clues. Nothing was coming up, so I decided to use our pal Google to search for cyber tools/references related to either a delicious breakfast of Eggs Benedict or perhaps the character Sherlock. Somewhat understandably, the latter is what got a hit and I was introduced to a OSINT search tool called `Sherlock` that takes a username, then returns all references of it across sites on the internet.
 
-Running our tool with the provided (what appears to be) username grants us the following:
+Running our tool with the given (what appears to be) username grants us the following:
 
 ![thehuntsafoot](src/sherlock_output.jpg)
 
@@ -284,7 +284,7 @@ Most of these sites appeared to be actually nonexistent once digging deeper, but
 
 ### rarity - 350 pts <a name="rarity"></a>
 
-**Provided:** With three belonging to a respective company, there is only a two-digit number amount of this entity left in the world. There is one near this picture... how close can you get to it? The flag format is the coordinates in decimal degrees notation, for example: `jctf{-65.91374,-10.81140}`
+**Challenge Description:** With three belonging to a respective company, there is only a two-digit number amount of this entity left in the world. There is one near this picture... how close can you get to it? The flag format is the coordinates in decimal degrees notation, for example: `jctf{-65.91374,-10.81140}`
 
 ![blimps](src/rarity.jpg)
 
@@ -296,11 +296,11 @@ A group member cleverly noted the area code visible in the bottom righthand corn
 
 Another hint was given late in the day of `Hindenberg Disaster`, which then makes the rarity/entity statement click: we are looking for `blimps`. *Sidenote: I was curious wtf the original hint was about, and a quick Google of 'blimp sub sandwich' revealed that there's a sub franchise called 'Blimpies' so TIL...*
 
-Back to Google Maps, I am drawn to the Wingfoot Lake area where Goodyear has a large blimp hanger. Poking around in street view, I walked around the lake's roads, and while taking a walk through the park, I was able to get close to our provided picture. Using those coordinates, we have our flag: `jctf{41.019753,-81.3621151}`
+Back to Google Maps, I am drawn to the Wingfoot Lake area where Goodyear has a large blimp hanger. Poking around in street view, I walked around the lake's roads, and while taking a walk through the park, I was able to get close to our given picture. Using those coordinates, we have our flag: `jctf{41.019753,-81.3621151}`
 
 ### contributor - 400 pts <a name="contributor"></a>
 
-**Provided:** Aren’t tech talks great? The JerseyCTF organizing staff is so grateful that our speakers can share their wonderful experiences with our participants. In fact, one of the speakers actually helped us develop https://www.jerseyctf.com/ and http://www.jerseyctf.online/. How cool is that!
+**Challenge Description:** Aren’t tech talks great? The JerseyCTF organizing staff is so grateful that our speakers can share their wonderful experiences with our participants. In fact, one of the speakers actually helped us develop https://www.jerseyctf.com/ and http://www.jerseyctf.online/. How cool is that!
 
 **Hint:** 1.0 × 10^100
 
@@ -325,11 +325,11 @@ Forensics offered some new challenges and tools to look into, as well as offered
 
 ### stolen-data - 150 pts <a name="stolen-data"></a>
 
-**Provided:** Someone accessed the server and stole the flag. Use the network packet capture to find it.
+**Challenge Description:** Someone accessed the server and stole the flag. Use the network packet capture to find it.
 
 **Hint:** Look for unusual ports
 
-**Solution:** We were provided a PCAP file, so I decided to explore it in Wireshark. Poking around, we see some traffic on `4444`, which is unusual, and following this TCP stream we see a pdf being retrieved:
+**Solution:** We were given a PCAP file, so I decided to explore it in Wireshark. Poking around, we see some traffic on `4444`, which is unusual, and following this TCP stream we see a pdf being retrieved:
 
 ![TCP](src/stolen-data-tcp.jpg)
 
@@ -339,9 +339,9 @@ Exporting the data as raw, we can obtain the PDF itself being sent, and voila it
 
 ### speedy-at-midi - 150 pts <a name="speedy-at-midi"></a>
 
-**Provided:** Your partner-in-crime gets a hold of a MIDI file, riff.mid, which intelligence officials claim to contain confidential information. He has tried opening it in VLC Media Player, but it sounds just like the piano riff in `riff.mp3`. Can you find the right tool to extract the hidden data?
+**Challenge Description:** Your partner-in-crime gets a hold of a MIDI file, riff.mid, which intelligence officials claim to contain confidential information. He has tried opening it in VLC Media Player, but it sounds just like the piano riff in `riff.mp3`. Can you find the right tool to extract the hidden data?
 
-**Solution:** We are provided with a `.mid` and a `.mp3` to work with. Listening to them off the bat, it is just junk noise and nothing of help. Since one file is a `midi` and that happens to coincide with our challenge name, I decided to open it up in a midi editor I used back when writing Noteblock songs for Minecraft... ah, memories.
+**Solution:** We are given a `.mid` and a `.mp3` to work with. Listening to them off the bat, it is just junk noise and nothing of help. Since one file is a `midi` and that happens to coincide with our challenge name, I decided to open it up in a midi editor I used back when writing Noteblock songs for Minecraft... ah, memories.
 
 Scrolling around to view the various channels, I noticed a track that looked rather interesting:
 
@@ -357,7 +357,7 @@ _nice_
 
 ### data-backup - 250 pts <a name="data-backup"></a>
 
-**Provided:** The backup of our data was somehow corrupted. Recover the data and be rewarded with a flag.
+**Challenge Description:** The backup of our data was somehow corrupted. Recover the data and be rewarded with a flag.
 
 **Hint:** Try a tool a surgeon might use.
 
@@ -365,7 +365,7 @@ _nice_
 
 [Here](https://github.com/sleuthkit/scalpel) is the tool's repo, and [here](https://github.com/HackThisSite/CTF-Writeups/blob/master/2017/EasyCTF/Zooooooom/scalpelConfig.txt) is the config that I used, but the TLDR of the tool is that it leverages known "magic" bytes of various file formats to carve them out of a corrupted dump.
 
-I ran the following on our provided `data-backup` file: `scalpel -c scalpelconfig.txt data-backup` and was presented with the following in under a second:
+I ran the following on our given `data-backup` file: `scalpel -c scalpelconfig.txt data-backup` and was presented with the following in under a second:
 
 ![scalpel](src/scalpel_output.jpg)
 
@@ -373,7 +373,7 @@ This recovered 5 zip files, numbered 0-4. Upon unzipping file "0", I was greeted
 
 ### scavenger-hunt - 350 pts <a name="scavenger-hunt"></a>
 
-**Provided:** My friend told me he hid a flag for me on this server! Server: `0.cloud.chals.io` SSH port: `24052`
+**Challenge Description:** My friend told me he hid a flag for me on this server! Server: `0.cloud.chals.io` SSH port: `24052`
 Username: `jersey`
 Password: `securepassword`
 
@@ -393,9 +393,9 @@ Searching our packages and looking for a flag, we see a package `notaflag` that 
 
 ### corrupted-file - 400 pts <a name="corrupted-file"></a>
 
-**Provided:** Can you find a way to fix our corrupted .jpg file?
+**Challenge Description:** Can you find a way to fix our corrupted .jpg file?
 
-**Solution:** We are provided with a photo that isn't doing so well at photo-ing in its current state.
+**Solution:** We are given a photo that isn't doing so well at photo-ing in its current state.
 
 Looking at the file in a hex editor, one of our group members quickly identified that the magic identification bytes at the start did not match what a JPEG should have:
 
@@ -416,21 +416,194 @@ This is pretty easy to fix. Running the following command, we can edit the requi
 --------------------------------------------------------------------------------
 
 ## Miscellaneous <a name="misc"></a>
-The second paragraph text
+This category of challenges had a bit of a hodge-podge, with a few being generic "Scripting" challenges, then others falling into what I think is more of a forensics category tbh based on the other challenges, but either way, here are my solutions:
 
 ### firewall-rules - 100 pts <a name="firewall-rules"></a>
 
+**Challenge Description:** Liar, Liar, Rules on Fire! A network administrator configured a device's firewall, but made a few errors along the way. Some of your favorite applications may have been denied... We can't worry about that yet, first step is to make sure external hosts aren't able to exploit vulnerable firewall rules. Add the vulnerable ports and put the answer in the flag format: jctf{INSERT NUMBER}
+
+**Solution:** The challenge's wording proved to be quite confusing to me, as I very lately discovered that by "Add" they mean the arithmetic operation, not just "type them out".
+
+We are provided the following list:
+
+![firewall](src/firewall.jpg)
+
+From here, we can narrow down the items of interest by filtering out items that originate from internal IPs as well as filtering out any DENY conditions. Shortly before the CTF closed, another hint was given to 'Focus on remote access', which leaves us with line items 5, 11, and 17, which are `rlogin`, `rdp`, and `telnet`, respectively. I tried both adding together the 'Numbers' of the firewall rule as well as the port numbers themselves and the latter proved successful.
+
+Our flag ends up being: `jctf{3925}`   
+
 ### snort-log - 100 pts <a name="snort-log"></a>
+
+**Challenge Description:** Let's just say: we are absolutely screwed. The company network administrator recently deployed Snort on our network and immediately received 575 alerts in the log file. To put it lightly, every attack out there is infecting the network. Did you take the required Information Security training? Anyways, the company is going to file for bankruptcy because of this :(. We might as well do SOMETHING so that we can get hired elsewhere. The network administrator mentions to you that after finishing reviewing the log file, she also noticed the web server CPU load and memory usage were abnormally high. Also, what's up with all of this network traffic? Manual analysis stinks, but let's find out what this attack is and take action...
+Put your answer in the flag format: jctf{INSERT STRING}
+
+**Solution:** This challenge description is certainly noisy, and the answer to the challenge turned out to be as well. Thinking about the various types of attacks we could filter our alerts for, DDoS comes to mind and doing a search on our log file actually only returns a single result:
+
+![snort](src/snort.jpg)
+
+Thus, our flag is: `jctf{aut0m@t1on1sb3tt3r}`
 
 ### we-will - 150 pts <a name="we-will"></a>
 
+**Challenge Description:** A flag was left behind but it seems to be protected.
+
+**Solution:**
+
+<img src="src/rockyou.gif" alt="rockyou" width="300"/></br>
+
+As the name suggests, we will be using the `rockyou` wordlist for this challenge.
+
+First, we need a hash from our provided .zip file, which we will extract using `John the Ripper` with the following command: `zip2john flag.zip > zip.hashes`. Then, we run our hash against the wordlist with the following command: `john zip.hashes --wordlist=/usr/share/wordlists/rockyou.txt`.
+
+We get the following output showing the proper password:
+
+```
+Using default input encoding: UTF-8
+Loaded 1 password hash (PKZIP [32/64])
+Will run 2 OpenMP threads
+Press 'q' or Ctrl-C to abort, almost any other key for status
+*@@!^^$25Jjersey (flag.zip/flag.txt)
+1g 0:00:00:01 DONE (2022-04-10 01:15) 0.9523g/s 13626Kp/s 13626Kc/s 13626KC/s *ame*..*22gaspar
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed.
+```
+
+Providing that password to the locked zip allows us to get at the file inside, which contains our flag: `jctf{y0u_r0ck3d_17}`
+
 ### filtered-feeders - 150 pts <a name="filtered-feeders"></a>
+
+**Challenge Description:** The fishing net caught plenty of herrings, but the flag is nowhere to be found! Try to find the flag within the pile of fish.
+
+**Hint:** How do you hide an image within an image?
+
+**Solution:** The challenge name led me to think that this would be a case of steganography based on image layers/filters, so I first played with the image in Photoshop, but didn't have any immediate results. I then did some Googling and found a tool called `Stegsolve` that could assist in picking some of the most common/advantageous image manipulations to check and loaded the picture in there.
+
+The unedited image is here:
+
+![herrings](src/herrings.jpg)
+
+And while flipping through a handful of the various options, we eventually get here, which shows us our flag:
+
+![herrings](src/herringsdecoded.jpg)
+
+`jctf{1_l0v3_h3rr1n65}`
 
 ### bank-clients - 250 pts <a name="bank-clients"></a>
 
+**Challenge Description:** While in Rome, a few heisters spotted a computer in the dumpster outside of a bank and took it. After brute forcing the computer credentials and getting in with "admin/password", there was a password-protected client database discovered. A Desktop sticky note had the following information: "To fellow bank employee - a way to remember each database PIN is that it is 4-digits ranging between 1000 and 9999". It appears the sticky note was auto-translating from another language as well - let's turn that off. Are you able to assist the heisters from here?
+
+**Hint:** After scrolling down, there was additional text on the Desktop sticky note that says "wyptbt lza zlwalt". These bank employees should be removed from the payroll immediately...
+
+**Solution:** In this challenge, we were provided with a .kbdx file, which is used to store credentials in KeePass.
+
+Conveniently, John the Ripper has a utility to extract the hash from this filetype, and we can do so with `keepass2john clients.kdbx > crackthis.txt`.
+
+Given our hint, we can run a Caesar cipher on the phrase and get "primum est septum." I don't remember my Latin that well, but my Italian is still fluent, so I take it that the first number is seven. This is great, as it reduces our search space by 90%!
+
+I wrote a quick Python script to create our wordlist of pins:
+
+```
+with open("pins.txt", "w") as f:
+    for i in range(7000, 7999):
+        f.write(str(i) + '\n')
+```
+
+Using hashcat, I ran our hash against the wordlist of pins with the following command: `hashcat -m 13400 crackthis.txt pins.txt`, which returns after a bit with a pin of `7182`.
+
+Using KeePass to open the file, we are prompted for a password, to which I enter the pin above. Glancing through the database, we see a user that has our flag: `jctf{R1ch_p3rson_#4}`
+
 ### dnsmasq-ip-extract - 300 pts <a name="dnsmasq-ip-extract"></a>
 
+**Challenge Description:** Extract all unique IPs from dnsmasq-ip-extract-dnsmasq.log, hash each IP (SHA256), and write the IP + hash to a text file (IP and hash should be separated by a space, and each IP + hash entry should be on a new line).
+
+NOTE: Alphabetical characters in the hash should be lower case, as seen in example below. Otherwise, your flag will be incorrect!
+
+Example of text file output contents:
+
+```
+10.59.78.165 a6dd519bf8c7c50df5ae519963b5cf1590a471f88343c603168645ff335b26fe
+10.244.220.245 20657ea410e8dd2dbf979a12fea35dd1b94beb6c2cac34f1d49c5824d03de5a1
+10.18.47.24 c0e481d8f55dbb7de078cdcf67ebf627dc371e969e7dbb0b93afcce104e9247e
+```
+The flag is the SHA256 hash of the output file. Example:
+```
+jctf{138706baa74bac72c8ee1c42eb3a7c6add2f71c0737c5044dcdd9cba7409ead6}
+```
+
+**Hint:** Verify that the end of your file has a new blank line.
+
+**Solution:** So this challenge is purely a coding exercise, which we can make quick work of in Python. The provided log file is 15,000 lines long, and contains lines in the following format:
+
+```
+...
+Feb 28 17:57:08 dnsmasq[28478]: reply dns.google.com is 10.180.52.55
+Feb 28 17:57:11 dnsmasq[28478]: query[A] dns.google.com from 10.86.40.224
+Feb 28 17:57:11 dnsmasq[28478]: forwarded dns.google.com to 10.86.40.224
+...
+```
+
+My high level thought process is to iterate the log file and load in each line, regex search for IP addresses at each step, then maintain a output list of IPs that I only add to if I find a new, unique IP during iteration. Then, I will create an output file iterating through the list of output IPs where I write a line for each IP followed by its sha256 hash, as outlined in the challenge description. Lastly, I will sha256 the output file via cmdline and submit that as my flag.
+
+My code is the following:
+
+```
+import os
+import re
+import hashlib
+
+os.chdir("/home/kali/Desktop/NYU/OffSec/jersey_ctf/dnsmasq-ip-extract")
+logfile = list(open('dnsmasq-ip-extract-dnsmasq.log', 'r').read().split('\n'))
+
+newip = []
+for entry in logfile:
+    ips = re.findall(r'[0-9]+(?:\.[0-9]+){3}', entry)
+    for ip in ips:
+        if ip not in newip:
+            newip.append(ip)
+
+with open("output.txt", 'w+') as f:
+    for ip in newip:
+        f.write(ip + ' ' + hashlib.sha256(ip.encode()).hexdigest() + '\n')
+    f.close()
+```
+
+To run the hash via cmdline, I did the following: `sha256sum output.txt`, which gave me the following: `90dc97926e09a45aa02ca3a95db387bb00ff83ccff18f4d18a3eb96b4893e8bb  output.txt`.
+
+Thus, our flag is: `jctf{90dc97926e09a45aa02ca3a95db387bb00ff83ccff18f4d18a3eb96b4893e8bb}`
+
 ### check-the-shadows - 300 pts <a name="check-the-shadows"></a>
+
+**Challenge Description:** Someone in operations recovered fragments of an important file from 142.93.56.4 when it was undergoing maintenance. Intel has it that one of the users has some valuable information. SSH into the server and retrieve it.
+
+**Solution:** The file provided appears to be an `/etc/shadow` file, listing out users in the following format:
+
+```
+user4:$6$WowE0YgXFbo8qnpl$gNUpk1lTUfNYHaQxpn7QaOQa9b4R19f9iqHPoUa6sN1CpVuJDvJbwer1CRIU3HsvoHgAlBIcNG.sE48D3j0.G0:19067:0:99999:7:::
+m3mcn4:$6$tID5EePxcGC39i0s$PUU96sINzE4HadxuDAgH23q5EYeT3VkQfGiYL.jW43Cywcj8jclU5zmjtuNXtDw.lCGfRkfPJLcc6aRLOWvJI/:19067:0:99999:7:::
+pg3bipbbk:$6$bB0bLuBj5t4L8odw$ST7a4EXc.KDnU1l5c2Lapoitw5/8ktxieSciBBrHnwFfBtxJDmuonLnxUevJCO5jDQe.i8ChXCV8qZvBKgG.f0:19067:0:99999:7:::
+
+```
+
+John the Ripper provides us the ability to load the file and test it against a wordlist, which for our purposes I'll use `rockyou` again for. The command is fairly simple, as we run `john --wordlist=/usr/share/wordlists/rockyou.txt shadow` where `shadow` is the file we were provided.
+
+Almost immediately, John finds the following user/password combinations:
+
+| User        | Password |
+|-------------|----------|
+| mwcvk1edl   | gabriel  |
+| dvdwxfgw23m | miriam   |
+| user86      | irina    |
+| user21      | remote   |
+
+I aborted the session after this, as all we need is a single user to login. As I am lazy and don't like typing the random letter users, I chose to use `user21` for the task.
+
+After SSHing into the server, I poked around to view the other users' folders and noticed that many contained a `file.txt` similar to me, except mine was blank for this user I chose. I decided to check the files for our flag in the format `jctf` with the following command: `grep -r 'jctf' /home`, which recursively searches the given directory and all of its files for the given pattern.
+
+I am given the following output:
+
+![shadows](src/shadows.jpg)
+
+From this, we can see there are a handful of red herrings, but `cenmu_vv`'s stands out as our flag: `jctf{o_noes_dicTionarY_atk}`  
 
 --------------------------------------------------------------------------------
 
