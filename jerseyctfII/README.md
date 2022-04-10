@@ -8,7 +8,7 @@ The challenge categories included `crypto`, `bin`, `osint`, `forensics`, `misc`,
 
 I've played with a fair number of cyber tools thus far through my studies and career, would consider myself a fairly competent coder, and recently got an introduction to rudimentary binary exploitation, but haven't tried formal applications in the osint or forensics categories prior to this competition. My main aim for this competition was to test my skills and learn new tools and techniques in the process, and due to this, I attempted nearly every challenge (...though, a few were a tad outside my current skillset, such as audio challenges). While the challenges were open for ~24 hours, I was only able to spend about ~8 on playing the CTF.
 
-My team finished in the top 10% of participants, so I was quite ecstatic with that for a first timer and I can't wait to see where I could place in next year's! Below are my writeups for the challenges I was able to pwn.
+My team finished in the top 10% of participants, so I was quite ecstatic with that for a first timer and I can't wait to see where I could place in next year's! Shoutout to my group members: @lilglow and @ rudra. Below are my writeups for some of the challenges:
 
 ## Quicklinks
 
@@ -608,16 +608,130 @@ From this, we can see there are a handful of red herrings, but `cenmu_vv`'s stan
 --------------------------------------------------------------------------------
 
 ## Web <a name="web"></a>
-The second paragraph text
+This category had a handful of web-type challenges.
 
 ### apache-logs - 100 pts <a name="apache-logs"></a>
 
+**Challenge Description:** An apache log file that contains recent traffic was pulled from a web server. There is suspicion that an external host was able to access a sensitive file accidentally placed in one of the company website's directories. Someone's getting fired...
+
+Identify the source IP address that was able to access the file by using the flag format: jctf{IP address}
+
+**Solution:** Given the description, you know that the file was successfully accessed, which would likely be a `200` status code indicating as such.
+
+Starting here, we can search the file with the command `cat webtraffic.log | grep '200'`, and it only returns us the following lines:
+
+```
+163.112.88.13 - - [28/Dec/2021:17:28:48 -0500] "GET /wp-content HTTP/1.0" 200 5011 "https://jerseyctf.com/robots.txt" "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/536.2 (KHTML, like Gecko) Chrome/40.0.884.0 Safari/536.2"
+25.175.40.142 - - [28/Dec/2021:17:37:42 -0500] "GET /search/tag/list HTTP/1.0" 200 4974 "http://www.lee-ferguson.biz/tmp/birthday.png" "Mozilla/5.0 (Macintosh; PPC Mac OS X 10_12_8; rv:1.9.2.20) Gecko/2015-09-29 10:23:08 Firefox/3.6.20"
+200.89.24.146 - - [28/Dec/2021:19:57:41 -0500] "GET /wp-content HTTP/1.0" 404 4985 "https://murray.info/privacy.html" "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_7_3; rv:1.9.2.20) Gecko/2018-01-11 09:17:52 Firefox/3.8"
+76.190.52.148 - - [28/Dec/2021:21:02:26 -0500] "GET /posts/posts/explore HTTP/1.0" 200 4973 "https://www.davisbank.com/tmp/bankrecords.pdf" "Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 6.2; Trident/3.0)"
+```
+
+As the filename of the last log indicates sensitive bank record, this is our candidate.
+
+The flag is: `jctf{76.190.52.148}`
+
 ### seigwards-secrets - 100 pts <a name="seigwards-secrets"></a>
+
+**Challenge Description:** Seigward has been storing his secrets on his website https://jerseyctf.co for decades. Hasn't failed him yet.
+
+**Solution:** For this one, poking around the website in dev tools gives us the following `.js` file being loaded:
+
+![seigward](src/seigward.jpg)
+
+As we can see, Seigward has unfortunately hardcoded his credential check and it's only base64 encoded. Don't be like Seigward. Don't use client-side validation or hard-coded credentials. :)
+
+A quick decode gives us his password, which turns out to be our flag: `jctf{CryptoIsTheKeyToFun}`
 
 ### heres-my-password - 250 pts <a name="heres-my-password"></a>
 
+**Challenge Description:** Here's the deal - we have a list of 500 users (males, females, and pets) and one password. Log-in with the proper credentials for the flag.
+
+The password is `lightswitchon_and_offLOL26` and the website is www.jerseyctf.online.
+
+**Solution:** As there are no apparent preventative measures in place on the site, we can attack this via the brute force method.
+
+Our team used the tool `Hydra` to efficiently pass in our userlist and parallelize our login attempts.
+
+Using the command `hydra -L users.txt -p lightswitchon_and_offLOL26 http-post-form://www.jerseyctf.online/:"username=^USER^&password=lightswitchon_and_offLOL26&submit=Login":"Invalid login"
+` we see the following with our username, `Wolverine`, which returns in seconds:
+
+![hydra](src/hydra.jpg)
+
+Upon successful login to the site, an alert pops up on our screen and we are granted the flag: `jctf{c0NGR@T2_y0U_p@22wORd_SPR@y3D!}`
+
 ### buster - 250 pts <a name="buster"></a>
+
+**Challenge Description:** Check out my new site, it has lots of cool pages! https://jerseyctf.xyz
+
+**Hint:** What do HTTP response codes actually mean?
+
+**Solution:** For this challenge, we unfortunately could not use a tool like DirBuster, as the server just returns random HTTP codes. Instead, we will need to script this one ourselves to crawl through the pages and return in the case any contain our flag.
+
+I used the same wordlist as was available on my kali box in tools like ZAP and DirBuster, and wrote the following script to attempt the brute forcing:
+
+```
+import requests
+
+dirs = list(open('directory-list-2.3-small.txt', 'r').read().split('\n'))
+
+def isFlag(page):
+    page = page.strip()
+    r = requests.get('https://jerseyctf.xyz/{}'.format(page))
+    if 'jctf' in r.text:
+        print('*'*20)
+        print("Flag has been found!")
+        print("Page contents are the following:")
+        print(r.text)
+        print('*'*20)
+        return True
+    return False
+
+for directory in dirs:
+    if isFlag(directory):
+        exit(0)
+```
 
 ### flag-vault - 300 pts <a name="flag-vault"></a>
 
+**Challenge Description:** I'm very organized. I even keep all of my flags neatly organized in a database! But, these are my flags! You don't have access to them... or do you? Start here: jerseyctf-flag-vault.chals.io
+
+**Solution:** Prompted with a login option on the site, I tried a basic `admin' OR 1=1-- -` payload on the username with `test` as the password, and on first try, was let in the site. That's convenient. Now that we're logged in as admin, we have a vault where we can search for flags:
+
+![vault](src/vault.jpg)
+
+Unfortunately, it seems like we weren't fully/truly logged in, or it didn't set the correct cookie, because with each search on the Flag ID prompt, we get logged back out. Reversing the admin/password fields to give `admin` as a user and the injection payload as the password, we log in fine again, but this time appear to stay logged in.
+
+Running a similar injection on this field doesn't work, as there are a ton of fakes sprinkled in the vault to hide what we're looking for. An example is returned here:
+
+![vault1](src/vault1.jpg)
+
+However, this is fine, because it proves that it's injectible, and we just need to narrow our search. Using the `LIKE` keyword in SQL, we can search for a pattern similar to our flag with `jctf{` and voila, we have our flag:
+
+![vault2](src/vault2.jpg)
+
 ### cookie-factory - 400 pts <a name="cookie-factory"></a>
+
+**Challenge Description:** Here at Granny's Old-Fashioned Home-Baked Cookie Factory, we pride ourselves on our cookies AND security being the best in the business. Start here: https://jerseyctf-cookie-factory.chals.io/
+
+**Solution:** For this challenge, we are again greeted by a website that is behind a login page. Using the login of `admin' OR 1=1-- -` for the username with `test` as the password, we are in and can now view a dashboard page.
+
+![granny1](src/granny1.jpg)
+
+The dashboard references CVE-2018-1000531, which outlines a vulnerability in JWTDecoder.decode that results in incorrect signature validation of a JWT token.
+
+Looking at our cookie, we can see that it is in fact the JWT in mention after base64 decoding it to the following: `{"typ":"JWT","alg":"HS256"}{"username":"admin' OR 1=1-- -"}8q .Ðk.UÛÑ rk"¨¼.eúåf.ô]æ¥{g.D.@`
+
+I opened up the site in Burp suite to allow for quick edits of the cookie, where I replicated the above login and then sent the `/dashboard` page load to the repeater.
+
+Editing the cookie a bit to match the CVE, we set our `alg` to `none` and the `username` to purely `admin`: `{"typ":"JWT","alg":"none"}{"username":"admin"}8q .Ðk.UÛÑ rk"¨¼.eúåf.ô]æ¥{g.D.@`
+
+I thought that decoding this back to base64 and passing it along would be suffice, but I struggled for a solid 15 minutes on where my formatting was off before I realized that the cookie had `.` delimiters while accidentally highlighting part of my input in CyberChef:
+
+![granny-cyber](src/granny-cyberchef.jpg)
+
+Editing my string to be 3 delineated parts gave me the following: `eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0=.eyJ1c2VybmFtZSI6ImFkbWluIn0=.OHEgLtBrLlXb0SByayKovC5l+uVmLvRd5qV7Zy5ELkA=`, which then gives us a lovely, tasty cookie from Granny:
+
+![granny-burp](src/granny-burp.jpg)
+
+Flag: `jctf{GEEZ_WHAT_A_TOUGH_COOKIE}`
