@@ -186,6 +186,8 @@ Aye aye, we have our flag!
 ## Binary exploitation <a name="bin"></a>
 This section included some new types of files that I was unable to solve, such as .jar files and windows .dlls. I had only been exposed to x86 previously, so I will definitely be doing some reading in these new categories to become familiar for future challenges.
 
+--------------------------------------------------------------------------------
+
 ### patches - 200 pts <a name="patches"></a>
 
 **Challenge Description**: Given an objdump of an executable, figure out what hexadecimal instructions are needed to nop to get the jctf flag to stdout
@@ -349,6 +351,8 @@ Entering the correct answers provides us a pop-up with our flag: `jctf{b3_CAR3fu
 ## Forensics <a name="forensics"></a>
 Forensics offered some new challenges and tools to look into, as well as offered some comfort through familiarity with linux.   
 
+--------------------------------------------------------------------------------
+
 ### stolen-data - 150 pts <a name="stolen-data"></a>
 
 **Challenge Description:** Someone accessed the server and stole the flag. Use the network packet capture to find it.
@@ -451,6 +455,8 @@ This is pretty easy to fix. Running the following command, we can edit the requi
 
 ## Miscellaneous <a name="misc"></a>
 This category of challenges had a bit of a hodge-podge, with a few being generic "Scripting" challenges, then others falling into what I think is more of a forensics category tbh based on the other challenges, but either way, here are my solutions:
+
+--------------------------------------------------------------------------------
 
 ### firewall-rules - 100 pts <a name="firewall-rules"></a>
 
@@ -655,6 +661,8 @@ From this, we can see there are a handful of red herrings, but `cenmu_vv`'s stan
 
 ## Web <a name="web"></a>
 This category had a handful of web-type challenges.
+
+--------------------------------------------------------------------------------
 
 ### apache-logs - 100 pts <a name="apache-logs"></a>
 
