@@ -752,6 +752,10 @@ for directory in dirs:
         exit(0)
 ```
 
+This returns the following, which gives us our flag: `jctf{1t5_jUst_4_nUmb3r_ag8h7z8021}`
+
+![buster](src/buster.jpg)
+
 --------------------------------------------------------------------------------
 
 ### flag-vault - 300 pts <a name="flag-vault"></a>
