@@ -8,7 +8,7 @@ The challenge categories included `crypto`, `bin`, `osint`, `forensics`, `misc`,
 
 I've played with a fair number of cyber tools thus far through my studies and career, would consider myself a fairly competent coder, and recently got an introduction to rudimentary binary exploitation, but haven't tried formal applications in the osint or forensics categories prior to this competition. My main aim for this competition was to test my skills and learn new tools and techniques in the process, and due to this, I attempted nearly every challenge (...though, a few were a tad outside my current skillset, such as audio challenges). While the challenges were open for ~24 hours, I was only able to spend about ~8 on playing the CTF.
 
-My team finished in the top 10% of participants, so I was quite ecstatic with that for a first timer and I can't wait to see where we could place in next year's! Shoutout to my group members: @lilglow and @rudra. Below are my writeups for some of the challenges:
+My team finished in the top 10% of participants, so I was quite ecstatic with that for a first timer and I can't wait to see where we could place in next year's! Shoutout to my group members: [@lilglow](https://github.com/lilglow) and [@Rudra](https://github.com/a759116). Below are my writeups for some of the challenges:
 
 ## Quicklinks
 
